@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino's Server Seite</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        header {
+            background: #161b22;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav {
+            background: #21262d;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #58a6ff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .box {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .status {
+            color: #3fb950;
+            font-weight: bold;
+        }
+
+        button {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2ea043;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #161b22;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🎮 Dino's Server</h1>
+    <p>Willkommen auf meiner Nginx Webseite</p>
+</header>
+
+<nav>
+    <a href="#">Start</a>
+    <a href="#">Server</a>
+    <a href="#">Kontakt</a>
+</nav>
+
+<div class="container">
+
+    <div class="box">
+        <h2>Server Status</h2>
+        <p>Status: <span class="status">Online ✅</span></p>
+        <button onclick="checkStatus()">Status prüfen</button>
+    </div>
+
+    <div class="box">
+        <h2>Über den Server</h2>
+        <p>Hier kannst du Infos über deinen DayZ oder Game Server einfügen.</p>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Dino</p>
+</footer>
+
+<script>
+    function checkStatus() {
+        alert("Server läuft einwandfrei 🚀");
+    }
+</script>
+
+</body>
+</html>

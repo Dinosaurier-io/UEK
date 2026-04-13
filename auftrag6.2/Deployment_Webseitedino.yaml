@@ -1,0 +1,58 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webseite-dino
+  labels:
+    app: webseite-dino
+    app.kubernetes.io/part-of: webseite-dino
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webseite-dino
+  template:
+    metadata:
+      labels:
+        app: webseite-dino
+    spec:
+      containers:
+      - name: container-webseite-dino
+        resources: {}
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        image: ghcr.io/dinosaurier-io/html-openshift-app-dinotonet:v1
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: html-openshift-app
+  labels:
+    app: webseite-dino
+    app.kubernetes.io/part-of: webseite-dino
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: webseite-dino
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: html-openshift-app
+  labels:
+    app: webseite-dino
+    app.kubernetes.io/part-of: webseite-dino
+spec:
+  to:
+    kind: Service
+    name: html-openshift-app
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
