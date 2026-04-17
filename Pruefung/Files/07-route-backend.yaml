@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: counter-backend
+  labels:
+    name: counter-backend
+spec:
+  to:
+    kind: Service
+    name: counter-backend
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect   # HTTP → HTTPS
+  wildcardPolicy: None

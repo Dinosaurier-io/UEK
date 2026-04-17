@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-backend
+  labels:
+    app: counter-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: counter-backend
+  template:
+    metadata:
+      labels:
+        app: counter-backend
+    spec:
+      containers:
+        - name: counter-backend
+          image: ghcr.io/<YOUR_GITHUB_USERNAME>/counter-backend:v1   # <-- Anpassen
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            # NPM-Cache Workaround (nodejs/docker-node#1749)
+            - name: npm_config_cache
+              value: ./.npm-cache
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: counter-database
+                  key: database-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: counter-database
+                  key: database-password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: counter-database
+                  key: database-name
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: counter-database
+                  key: database-host

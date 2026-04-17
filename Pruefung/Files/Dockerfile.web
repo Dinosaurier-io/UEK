@@ -1,0 +1,26 @@
+# =============================================================================
+# Dockerfile – counter-backend (Node.js)
+# =============================================================================
+# Port-Check: Falls du dir nicht sicher bist, welchen Port das Backend nutzt:
+#   grep -r "listen\|PORT" ./src
+# =============================================================================
+ 
+FROM node:20-alpine
+ 
+# Arbeitsverzeichnis im Container
+WORKDIR /app
+ 
+# Abhängigkeiten zuerst kopieren (besseres Layer-Caching)
+COPY package*.json ./
+ 
+# Produktions-Abhängigkeiten installieren
+RUN npm ci --omit=dev
+ 
+# Restlichen Quellcode kopieren
+COPY . .
+ 
+# Port freigeben (Default Node.js: 3000 – ggf. anpassen)
+EXPOSE 3000
+ 
+# Anwendung starten
+CMD ["node", "src/index.js"]
